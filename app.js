@@ -50,12 +50,24 @@ const products=[
   },
   {
     "id": 105,
-    "name": "Kit shampoo e condicionador 400 ml",
+    "name": "Shampoo 400 ml",
     "category": "Cabelos",
     "brand": "Cuidado+",
     "code": "CAB-001",
-    "description": "Shampoo 400 ml + condicionador 400 ml.",
-    "type": "kit",
+    "description": "Frasco de 400 ml · Venda por unidade.",
+    "type": "bottle",
+    "color": "#db3342",
+    "background": "#fff",
+    "tag": "Linha cabelos"
+  },
+  {
+    "id": 114,
+    "name": "Condicionador 400 ml",
+    "category": "Cabelos",
+    "brand": "Cuidado+",
+    "code": "CAB-002",
+    "description": "Frasco de 400 ml · Venda por unidade.",
+    "type": "bottle",
     "color": "#db3342",
     "background": "#fff",
     "tag": "Linha cabelos"
