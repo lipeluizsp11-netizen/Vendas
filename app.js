@@ -176,7 +176,7 @@ try{localStorage.setItem("vitrine-cart",JSON.stringify(cart));}catch{}
 }
 function notify(text){el("toast").textContent=text;el("toast").style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>el("toast").style.display="none",3000);}
 function orderMessage(){
-return ["PEDIDO — "+(config.storeName||"Vitrine"),"Cliente: "+(el("customer").value.trim()||"Não informado"),"WhatsApp: "+(el("phone").value.trim()||"Não informado"),"",...selected().map(p=>cart[p.id]+" × "+p.name+" — "+p.brand+" ("+p.code+") — "+money(p.price*cart[p.id])),"","Valores: consulte o vendedor","Observações: "+(el("notes").value.trim()||"Sem observações"),"","Disponibilidade, frete e prazo sujeitos à confirmação do vendedor."].join("\n");
+return ["PEDIDO — "+(config.storeName||"Vitrine"),"Cliente: "+(el("customer").value.trim()||"Não informado"),"WhatsApp: "+(el("phone").value.trim()||"Não informado"),"",...selected().map(p=>cart[p.id]+" × "+p.name+" — "+p.brand+" ("+p.code+") — "+'Consulte'),"","Valores: consulte o vendedor","Observações: "+(el("notes").value.trim()||"Sem observações"),"","Disponibilidade, frete e prazo sujeitos à confirmação do vendedor."].join("\n");
 }
 el("filters").innerHTML=["Todos",...new Set(products.map(p=>p.category))].map(c=>'<button type="button" class="'+(c==="Todos"?"active":"")+'" aria-pressed="'+(c==="Todos")+'">'+c+'</button>').join("");
 el("filters").addEventListener("click",event=>{
