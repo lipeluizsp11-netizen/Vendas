@@ -6,7 +6,7 @@ const products=[
     "category": "Cuidados infantis",
     "brand": "Essencial",
     "code": "LEN-001",
-    "description": "Pacote com 100 unidades · Uso diário.",
+    "description": "Leve 120, pague 100 · Pacote com 120 unidades.",
     "type": "wipes",
     "color": "#b71927",
     "background": "#fff",
@@ -18,7 +18,7 @@ const products=[
     "category": "Cuidados infantis",
     "brand": "Cuidado+",
     "code": "LEN-002",
-    "description": "Pacote com 50 unidades · Embalagem prática.",
+    "description": "Leve 120, pague 100 · Pacote com 120 unidades.",
     "type": "wipes",
     "color": "#db3342",
     "background": "#fff",
@@ -50,11 +50,11 @@ const products=[
   },
   {
     "id": 105,
-    "name": "Kit shampoo e condicionador",
+    "name": "Kit shampoo e condicionador 400 ml",
     "category": "Cabelos",
     "brand": "Cuidado+",
     "code": "CAB-001",
-    "description": "Shampoo 300 ml + condicionador 300 ml.",
+    "description": "Shampoo 400 ml + condicionador 400 ml.",
     "type": "kit",
     "color": "#db3342",
     "background": "#fff",
@@ -74,11 +74,11 @@ const products=[
   },
   {
     "id": 107,
-    "name": "Sabonete líquido para mãos",
+    "name": "Sabonete líquido para mãos 500 ml",
     "category": "Banho e corpo",
     "brand": "Essencial",
     "code": "BAN-001",
-    "description": "Frasco com válvula · 250 ml.",
+    "description": "Frasco de 500 ml · Higiene das mãos.",
     "type": "pump",
     "color": "#b71927",
     "background": "#fff",
@@ -86,13 +86,25 @@ const products=[
   },
   {
     "id": 108,
-    "name": "Sabonete líquido corporal",
+    "name": "Sabonete líquido para mãos 1 L",
     "category": "Banho e corpo",
     "brand": "Cuidado+",
     "code": "BAN-002",
-    "description": "Frasco de 400 ml · Banho e cuidados diários.",
+    "description": "Embalagem de 1 L · Higiene das mãos.",
     "type": "pump",
     "color": "#db3342",
+    "background": "#fff",
+    "tag": "Linha banho e corpo"
+  },
+  {
+    "id": 113,
+    "name": "Sabonete líquido 2 L",
+    "category": "Banho e corpo",
+    "brand": "Essencial",
+    "code": "BAN-004",
+    "description": "Embalagem de 2 L · Higiene e cuidados diários.",
+    "type": "pump",
+    "color": "#b71927",
     "background": "#fff",
     "tag": "Linha banho e corpo"
   },
@@ -122,24 +134,24 @@ const products=[
   },
   {
     "id": 111,
-    "name": "Hastes flexíveis",
+    "name": "Hastes flexíveis — 75 unidades",
     "category": "Acessórios de higiene",
     "brand": "Cuidado+",
     "code": "HIG-001",
-    "description": "Embalagem com 75 unidades.",
-    "type": "box",
+    "description": "Caixa com 75 unidades.",
+    "type": "swabs75",
     "color": "#db3342",
     "background": "#fff",
     "tag": "Linha acessórios de higiene"
   },
   {
     "id": 112,
-    "name": "Algodão em discos",
+    "name": "Algodão — 40 g",
     "category": "Acessórios de higiene",
     "brand": "Dia a Dia",
     "code": "HIG-002",
-    "description": "Pacote com 50 unidades · Cuidados pessoais.",
-    "type": "box",
+    "description": "Embalagem com 40 g · Cuidados pessoais.",
+    "type": "cotton40",
     "color": "#961421",
     "background": "#fff",
     "tag": "Linha acessórios de higiene"
@@ -151,7 +163,7 @@ let cart={},category="Todos",brand="Todas as marcas",toastTimer;
 try{const saved=JSON.parse(localStorage.getItem("vitrine-cart")||"{}");if(saved&&typeof saved==="object"&&!Array.isArray(saved))cart=saved;}catch{}
 for(const key of Object.keys(cart))if(!products.some(p=>String(p.id)===key)||!Number.isInteger(cart[key])||cart[key]<1||cart[key]>999)delete cart[key];
 function illustration(p){
-const key=p.id===104?"brushkit":p.id===112?"cotton":p.type;
+const key=p.id===104?"brushkit":p.type;
 return '<img class="product-photo" src="assets/products/'+key+'.png" alt="'+p.name+' — embalagem genérica sem marca, imagem ilustrativa" loading="lazy" decoding="async" width="640" height="640">';
 }
 function renderProducts(){
