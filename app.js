@@ -5,7 +5,6 @@ const products=[
     "name": "Lenços umedecidos",
     "category": "Cuidados infantis",
     "brand": "Essencial",
-    "price": 12.9,
     "code": "LEN-001",
     "description": "Pacote com 100 unidades · Uso diário.",
     "type": "wipes",
@@ -18,7 +17,6 @@ const products=[
     "name": "Lenços umedecidos infantis",
     "category": "Cuidados infantis",
     "brand": "Cuidado+",
-    "price": 9.9,
     "code": "LEN-002",
     "description": "Pacote com 50 unidades · Embalagem prática.",
     "type": "wipes",
@@ -31,7 +29,6 @@ const products=[
     "name": "Escova de dentes macia",
     "category": "Higiene bucal",
     "brand": "Dia a Dia",
-    "price": 7.9,
     "code": "BUC-001",
     "description": "Uma unidade · Cerdas macias.",
     "type": "brush",
@@ -44,7 +41,6 @@ const products=[
     "name": "Kit de escovas de dentes",
     "category": "Higiene bucal",
     "brand": "Essencial",
-    "price": 18.9,
     "code": "BUC-002",
     "description": "Kit com 3 unidades · Para a rotina da família.",
     "type": "brush",
@@ -57,7 +53,6 @@ const products=[
     "name": "Kit shampoo e condicionador",
     "category": "Cabelos",
     "brand": "Cuidado+",
-    "price": 29.9,
     "code": "CAB-001",
     "description": "Shampoo 300 ml + condicionador 300 ml.",
     "type": "kit",
@@ -70,7 +65,6 @@ const products=[
     "name": "Shampoo infantil",
     "category": "Cuidados infantis",
     "brand": "Dia a Dia",
-    "price": 16.9,
     "code": "INF-001",
     "description": "Frasco de 200 ml · Linha infantil.",
     "type": "bottle",
@@ -83,7 +77,6 @@ const products=[
     "name": "Sabonete líquido para mãos",
     "category": "Banho e corpo",
     "brand": "Essencial",
-    "price": 14.9,
     "code": "BAN-001",
     "description": "Frasco com válvula · 250 ml.",
     "type": "pump",
@@ -96,7 +89,6 @@ const products=[
     "name": "Sabonete líquido corporal",
     "category": "Banho e corpo",
     "brand": "Cuidado+",
-    "price": 22.9,
     "code": "BAN-002",
     "description": "Frasco de 400 ml · Banho e cuidados diários.",
     "type": "pump",
@@ -109,7 +101,6 @@ const products=[
     "name": "Creme dental",
     "category": "Higiene bucal",
     "brand": "Dia a Dia",
-    "price": 6.9,
     "code": "BUC-003",
     "description": "Bisnaga de 90 g · Higiene bucal diária.",
     "type": "tube",
@@ -122,7 +113,6 @@ const products=[
     "name": "Hidratante corporal",
     "category": "Banho e corpo",
     "brand": "Essencial",
-    "price": 24.9,
     "code": "BAN-003",
     "description": "Frasco de 200 ml · Cuidados com a pele.",
     "type": "bottle",
@@ -135,7 +125,6 @@ const products=[
     "name": "Hastes flexíveis",
     "category": "Acessórios de higiene",
     "brand": "Cuidado+",
-    "price": 5.9,
     "code": "HIG-001",
     "description": "Embalagem com 75 unidades.",
     "type": "box",
@@ -148,7 +137,6 @@ const products=[
     "name": "Algodão em discos",
     "category": "Acessórios de higiene",
     "brand": "Dia a Dia",
-    "price": 8.9,
     "code": "HIG-002",
     "description": "Pacote com 50 unidades · Cuidados pessoais.",
     "type": "box",
@@ -158,7 +146,6 @@ const products=[
   }
 ];
 const el=id=>document.getElementById(id);
-const money=value=>value.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
 const config=window.STORE_CONFIG||{};
 let cart={},category="Todos",brand="Todas as marcas",toastTimer;
 try{const saved=JSON.parse(localStorage.getItem("vitrine-cart")||"{}");if(saved&&typeof saved==="object"&&!Array.isArray(saved))cart=saved;}catch{}
@@ -171,14 +158,14 @@ function renderProducts(){
 const query=el("search").value.trim().toLocaleLowerCase("pt-BR");
 const shown=products.filter(p=>(category==="Todos"||p.category===category)&&(brand==="Todas as marcas"||p.brand===brand)&&(p.name+" "+p.code+" "+p.brand).toLocaleLowerCase("pt-BR").includes(query));
 el("count").textContent=shown.length+" produtos";
-el("products").innerHTML=shown.map(p=>'<article class="card"><div class="art" style="background:'+p.background+'"><span class="tag">'+p.tag+'</span>'+illustration(p)+'</div><div class="info"><div class="code">'+p.code+' · '+p.brand+'</div><h3>'+p.name+'</h3><div class="description">'+p.description+'</div><div class="price">'+money(p.price)+'</div><button class="add" data-action="add" data-id="'+p.id+'">+ Adicionar ao pedido</button></div></article>').join("")||'<p class="muted">Nenhum produto encontrado. Tente outra busca.</p>';
+el("products").innerHTML=shown.map(p=>'<article class="card"><div class="art" style="background:'+p.background+'"><span class="tag">'+p.tag+'</span>'+illustration(p)+'</div><div class="info"><div class="code">'+p.code+' · '+p.brand+'</div><h3>'+p.name+'</h3><div class="description">'+p.description+'</div><div class="price">'+'Consulte'+'</div><button class="add" data-action="add" data-id="'+p.id+'">+ Adicionar ao pedido</button></div></article>').join("")||'<p class="muted">Nenhum produto encontrado. Tente outra busca.</p>';
 }
 function selected(){return products.filter(p=>cart[p.id]);}
 function whatsappAvailable(){return config.whatsappEnabled===true&&/^55[1-9]\d{9,10}$/.test(config.sellerWhatsApp||"");}
 function renderCart(){
 const items=selected(),quantity=items.reduce((sum,p)=>sum+cart[p.id],0);
-el("cart").innerHTML=items.map(p=>'<div class="line"><div class="line-top"><strong>'+p.name+'</strong><button class="remove" data-action="remove" data-id="'+p.id+'" aria-label="Remover '+p.name+'">×</button></div><div class="controls"><button data-action="minus" data-id="'+p.id+'" aria-label="Diminuir quantidade de '+p.name+'">−</button><span>'+cart[p.id]+'</span><button data-action="add" data-id="'+p.id+'" aria-label="Aumentar quantidade de '+p.name+'">+</button><strong>'+money(p.price*cart[p.id])+'</strong></div></div>').join("")||'<div class="empty">Sua lista está esperando por você.<br>Adicione seus produtos favoritos.</div>';
-el("total").textContent=money(items.reduce((sum,p)=>sum+p.price*cart[p.id],0));
+el("cart").innerHTML=items.map(p=>'<div class="line"><div class="line-top"><strong>'+p.name+'</strong><button class="remove" data-action="remove" data-id="'+p.id+'" aria-label="Remover '+p.name+'">×</button></div><div class="controls"><button data-action="minus" data-id="'+p.id+'" aria-label="Diminuir quantidade de '+p.name+'">−</button><span>'+cart[p.id]+'</span><button data-action="add" data-id="'+p.id+'" aria-label="Aumentar quantidade de '+p.name+'">+</button><strong>'+'Consulte'+'</strong></div></div>').join("")||'<div class="empty">Sua lista está esperando por você.<br>Adicione seus produtos favoritos.</div>';
+el("total").textContent="Consulte";
 el("badge").textContent=quantity;
 el("quantity").textContent=quantity+(quantity===1?" item":" itens");
 el("copy").disabled=!items.length;
@@ -189,7 +176,7 @@ try{localStorage.setItem("vitrine-cart",JSON.stringify(cart));}catch{}
 }
 function notify(text){el("toast").textContent=text;el("toast").style.display="block";clearTimeout(toastTimer);toastTimer=setTimeout(()=>el("toast").style.display="none",3000);}
 function orderMessage(){
-return ["PEDIDO — "+(config.storeName||"Vitrine"),"Cliente: "+(el("customer").value.trim()||"Não informado"),"WhatsApp: "+(el("phone").value.trim()||"Não informado"),"",...selected().map(p=>cart[p.id]+" × "+p.name+" — "+p.brand+" ("+p.code+") — "+money(p.price*cart[p.id])),"","Total dos produtos: "+el("total").textContent,"Observações: "+(el("notes").value.trim()||"Sem observações"),"","Disponibilidade, frete e prazo sujeitos à confirmação do vendedor."].join("\n");
+return ["PEDIDO — "+(config.storeName||"Vitrine"),"Cliente: "+(el("customer").value.trim()||"Não informado"),"WhatsApp: "+(el("phone").value.trim()||"Não informado"),"",...selected().map(p=>cart[p.id]+" × "+p.name+" — "+p.brand+" ("+p.code+") — "+money(p.price*cart[p.id])),"","Valores: consulte o vendedor","Observações: "+(el("notes").value.trim()||"Sem observações"),"","Disponibilidade, frete e prazo sujeitos à confirmação do vendedor."].join("\n");
 }
 el("filters").innerHTML=["Todos",...new Set(products.map(p=>p.category))].map(c=>'<button type="button" class="'+(c==="Todos"?"active":"")+'" aria-pressed="'+(c==="Todos")+'">'+c+'</button>').join("");
 el("filters").addEventListener("click",event=>{
